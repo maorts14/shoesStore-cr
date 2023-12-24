@@ -1,3 +1,7 @@
+# cr - move to models directory as well, split into seperate files
+# and the classes that exist also in models can be merged into 
+# one class that have the ability to act as sql class
+
 from typing import List, Optional
 
 from pydantic import BaseModel

@@ -1,3 +1,5 @@
+# cr - move to models directory and split into seperate files
+
 from sqlalchemy.orm import relationship
 
 from database import Base

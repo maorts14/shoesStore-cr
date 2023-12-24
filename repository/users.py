@@ -20,14 +20,14 @@ def get_all(db: Session):
 
 def get_by_id(user_id: int, db: Session):
     user = db.query(models.User).filter(models.User.id == user_id).first()
-    if not user:
+    if not user: # cr - not good exception
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with id {user_id} was not found")
     return user
 
 
 def delete(user_id: int, db: Session):
     user = db.query(models.User).filter(models.User.id == user_id).first()
-    if not user:
+    if not user: # cr - good exception
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Shoe with id {user_id} was not found")
     db.delete(user)
     db.commit()

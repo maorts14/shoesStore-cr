@@ -1,3 +1,5 @@
+# cr - move to commons/helpers directory
+
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

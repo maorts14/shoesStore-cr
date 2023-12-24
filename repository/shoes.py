@@ -7,14 +7,14 @@ import schemas
 
 def get_all(db: Session):
     shoes = db.query(models.Shoe).all()
-    if not shoes:
+    if not shoes: # cr - i wouldnt throw exception for that, its legitimate to return 0 results
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"There are no shoes in store")
     return shoes
 
 
 def get_by_id(shoe_id: int, db: Session):
     shoe = db.query(models.Shoe).filter(models.Shoe.id == shoe_id).first()
-    if not shoe:
+    if not shoe: # cr - i wouldnt throw exception for that, its legitimate to return 0 results
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Shoe with id {shoe_id} was not found")
     return shoe
 
@@ -30,7 +30,7 @@ def create(request: schemas.Shoe, db: Session):
 
 def delete(db: Session, shoe_id: int):
     shoe = db.query(models.Shoe).filter(models.Shoe.id == shoe_id).first()
-    if not shoe:
+    if not shoe:  # cr - this for example is a good exception , because the user shouldnt ask to delete something that is not exist
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Shoe with id {shoe_id} was not found")
     db.delete(shoe)
     db.commit()
